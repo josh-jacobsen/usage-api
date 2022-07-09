@@ -1,0 +1,19 @@
+{
+  "name": "interview-josh-jacobsen-ae44825e64234d5a9efd7f7074a0703d",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zapier-interviews/interview-josh-jacobsen-ae44825e64234d5a9efd7f7074a0703d.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zapier-interviews/interview-josh-jacobsen-ae44825e64234d5a9efd7f7074a0703d/issues"
+  },
+  "homepage": "https://github.com/zapier-interviews/interview-josh-jacobsen-ae44825e64234d5a9efd7f7074a0703d#readme"
+}
