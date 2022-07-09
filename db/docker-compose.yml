@@ -6,7 +6,7 @@ services:
     image: mongo
     restart: always
     ports:
-      - "27019:27017" # Use port 27019 to avoid conflicts with any other running Mongo instance
+      - "27019:27017" # Use port 27019 to avoid conflicting with any other running Mongo instance
     environment:
       MONGO_INITDB_ROOT_USERNAME: username
       MONGO_INITDB_ROOT_PASSWORD: password
