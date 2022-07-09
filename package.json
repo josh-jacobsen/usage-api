@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/zapier-interviews/interview-josh-jacobsen-ae44825e64234d5a9efd7f7074a0703d/issues"
   },
-  "homepage": "https://github.com/zapier-interviews/interview-josh-jacobsen-ae44825e64234d5a9efd7f7074a0703d#readme"
+  "homepage": "https://github.com/zapier-interviews/interview-josh-jacobsen-ae44825e64234d5a9efd7f7074a0703d#readme",
+  "devDependencies": {
+    "typescript": "4.7.4"
+  }
 }
