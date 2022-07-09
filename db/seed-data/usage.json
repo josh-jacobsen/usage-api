@@ -1,0 +1,32 @@
+[
+  {
+    "customerId": 123,
+    "service": "Database Hosting",
+    "unitsConsumed": 58,
+    "pricePerUnit": 0.05
+  },
+  {
+    "customerId": 456,
+    "service": "Load Balancer",
+    "unitsConsumed": 27,
+    "pricePerUnit": 0.03
+  },
+  {
+    "customerId": 123,
+    "service": "Linux Instance",
+    "unitsConsumed": 42,
+    "pricePerUnit": 0.15
+  },
+  {
+    "customerId": 123,
+    "service": "CDN Storage",
+    "unitsConsumed": 15,
+    "pricePerUnit": 0.02
+  },
+  {
+    "customerId": 456,
+    "service": "Domain Name Registration",
+    "unitsConsumed": 1,
+    "pricePerUnit": 14.99
+  }
+]
