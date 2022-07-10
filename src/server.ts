@@ -2,13 +2,17 @@ import express, { Express, Request, Response } from 'express'
 import dotenv from 'dotenv'
 import bp from 'body-parser'
 
-import { addUsage, getUsage } from './db'
+import { addUsageRecord, getAllUsageRecords, getUsageRecordById } from './db'
 
 export interface Usage {
     customerId: number
     service: string
     unitsConsumed: number
     pricePerUnit: number
+}
+
+interface InsertedRecord {
+    insertedId: string
 }
 
 dotenv.config()
@@ -21,7 +25,7 @@ app.use(bp.urlencoded({ extended: true }))
 
 app.get('/', async (req: Request, res: Response) => {
     try {
-        const usage = await getUsage()
+        const usage = await getAllUsageRecords()
         res.status(200).send(usage)
     } catch (e: any) {
         console.error(e.message)
@@ -30,11 +34,10 @@ app.get('/', async (req: Request, res: Response) => {
 })
 
 app.post('/', async (req: Request, res: Response) => {
-    console.log('Start of function')
     try {
-        const thingToInsert: Usage = req.body
-        console.log('thing to insert:', thingToInsert)
-        const record = await addUsage(thingToInsert)
+        const usage: Usage = req.body
+        const insertedRecord: InsertedRecord = await addUsageRecord(usage)
+        const record = await getUsageRecordById(insertedRecord.insertedId)
         res.status(201).send(record)
     } catch (e: any) {
         console.error(e.message)

@@ -12,12 +12,21 @@ if (!conn || !collectionName) {
 }
 const client = new mongodb.MongoClient(conn)
 
-export const getUsage = async (): Promise<any> => {
+export const getAllUsageRecords = async (): Promise<any> => {
     const connection = await client.connect()
     return connection.db(dbName).collection(collectionName).find().toArray()
 }
 
-export const addUsage = async ({
+export const getUsageRecordById = async (id: string) => {
+    const connection = await client.connect()
+    const record = connection.db(dbName).collection(collectionName).findOne({
+        _id: id,
+    })
+    console.log('record', record)
+    return record
+}
+
+export const addUsageRecord = async ({
     customerId,
     service,
     unitsConsumed,
