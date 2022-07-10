@@ -33,7 +33,7 @@ app.post('/', async (req: Request, res: Response) => {
     console.log('Start of function')
     try {
         const thingToInsert: Usage = req.body
-        console.log('thing to insert: ', thingToInsert)
+        console.log('thing to insert:', thingToInsert)
         const record = await addUsage(thingToInsert)
         res.status(201).send(record)
     } catch (e: any) {

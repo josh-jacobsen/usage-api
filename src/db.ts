@@ -1,6 +1,6 @@
 import dotenv from 'dotenv'
 import * as mongodb from 'mongodb'
-import { Usage } from './index'
+import { Usage } from './server'
 
 dotenv.config()
 
