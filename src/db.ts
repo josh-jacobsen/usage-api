@@ -1,10 +1,11 @@
-import dotenv from 'dotenv'
 import * as mongodb from 'mongodb'
 import { Usage } from './server'
+import dotenv from 'dotenv'
 
 dotenv.config()
 
 const conn = process.env.DB_CONN_STRING
+const envVar = process.env.ENVIRONMENT
 const dbName = process.env.DB_NAME
 const collectionName = process.env.COLLECTION_NAME
 if (!conn || !collectionName) {

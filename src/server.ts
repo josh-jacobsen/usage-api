@@ -1,5 +1,4 @@
 import express, { Express, Request, Response } from 'express'
-import dotenv from 'dotenv'
 import bp from 'body-parser'
 
 import { addUsageRecord, getAllUsageRecords, getUsageRecordById } from './db'
@@ -15,15 +14,12 @@ interface InsertedRecord {
     insertedId: string
 }
 
-dotenv.config()
+const server: Express = express()
 
-const app: Express = express()
-const port = process.env.PORT
+server.use(bp.json())
+server.use(bp.urlencoded({ extended: true }))
 
-app.use(bp.json())
-app.use(bp.urlencoded({ extended: true }))
-
-app.get('/', async (req: Request, res: Response) => {
+server.get('/', async (req: Request, res: Response) => {
     try {
         const usage = await getAllUsageRecords()
         res.status(200).send(usage)
@@ -33,7 +29,7 @@ app.get('/', async (req: Request, res: Response) => {
     }
 })
 
-app.post('/', async (req: Request, res: Response) => {
+server.post('/', async (req: Request, res: Response) => {
     try {
         const usage: Usage = req.body
         const insertedRecord: InsertedRecord = await addUsageRecord(usage)
@@ -45,6 +41,4 @@ app.post('/', async (req: Request, res: Response) => {
     }
 })
 
-app.listen(port, () => {
-    console.log(`⚡️[server]: Server is running at https://localhost:${port}`)
-})
+export { server }
