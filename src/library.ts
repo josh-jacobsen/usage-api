@@ -11,7 +11,8 @@ const addUsageRecord = async ({
     unitsConsumed: number
     pricePerUnit: number
 }) => {
-    const url = new URL('http://localhost:8001')
+    // TODO: Add input validation
+    const url = new URL('http://localhost:8001/usage')
     await fetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

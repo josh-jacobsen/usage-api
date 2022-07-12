@@ -6,7 +6,7 @@
   "scripts": {
     "start": "concurrently 'npm run serve:dev' 'docker-compose -f db/docker-compose.yml up'",
     "build": "tsc",
-    "test": "jest --runInBand",
+    "test": "jest --runInBand --forceExit",
     "serve:dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts"
   },
   "repository": {
