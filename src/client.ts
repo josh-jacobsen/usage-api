@@ -1,10 +1,10 @@
-const library = require('./library')
+import { addUsageRecord } from './library'
 
 const usageRecord = {
-    customerId: 12,
-    pricePerUnit: 1.28,
-    service: 'My awesome service',
+    customerId: 121212,
+    pricePerUnit: 1.51,
+    service: 'My awesome service 2',
     unitsConsumed: 120,
 }
 
-library.addUsageRecord(usageRecord)
+addUsageRecord(usageRecord)
