@@ -1,10 +1,10 @@
 import { addUsageRecord } from './library'
 
 const usageRecord = {
-    customerId: 121212,
-    pricePerUnit: 1.51,
-    service: 'My awesome service 2',
-    unitsConsumed: 120,
+    customerId: 1,
+    pricePerUnit: 1.5,
+    service: 'Load Balancer',
+    unitsConsumed: 12,
 }
 
 addUsageRecord(usageRecord)

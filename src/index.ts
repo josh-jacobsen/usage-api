@@ -27,7 +27,7 @@ const main = async (usageController: UsageController) => {
     server.get('/usage', async (req: Request, res: Response) => {
         try {
             const records = await usageController.getAllUsageRecords()
-            return res.status(201).send(records)
+            return res.status(200).send(records)
         } catch (e: any) {
             console.error(e.message)
             return res.status(500).send(e.message)
