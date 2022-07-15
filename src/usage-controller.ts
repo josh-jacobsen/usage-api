@@ -11,6 +11,11 @@ export interface InsertedRecord {
     insertedId: string
 }
 
+/**
+ * TODO: Refactor this to a routes component. Its called UsageController but in fact the controller logic is contained in index.ts. So this in fact
+ * functions more like a service, in that it sits between the controller and repository layers.
+ * */
+
 export class UsageController {
     private readonly usageRepository
 

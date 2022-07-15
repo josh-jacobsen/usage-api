@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently 'npm run serve:dev' 'docker-compose -f db/docker-compose.yml up'",
+    "start": "concurrently 'npm run start:db' 'npm run start:server'",
     "build": "tsc",
     "test": "jest --runInBand --forceExit",
-    "serve:dev": "ts-node-dev --respawn --pretty --transpile-only src/index.ts"
+    "start:db": "docker-compose -f db/docker-compose.yml up",
+    "start:server": "ts-node-dev --respawn --pretty --transpile-only src/index.ts",
+    "start:client": "node dist/client.js"
   },
   "repository": {
     "type": "git",
