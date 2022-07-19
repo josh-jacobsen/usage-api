@@ -1,4 +1,5 @@
-import { DBUsage, UsageRepository } from './usage-repository'
+import { UsageRepository } from './usage-repository'
+import { Request, Response } from 'express'
 
 export interface Usage {
     customerId: number
@@ -23,14 +24,24 @@ export class UsageController {
         this.usageRepository = usageRepository
     }
 
-    async getAllUsageRecords(): Promise<DBUsage[]> {
-        return await this.usageRepository.getAllUsageRecords()
+    async getAllUsageRecords(req: Request, res: Response) {
+        try {
+            const records = await this.usageRepository.getAllUsageRecords()
+            return res.status(200).send(records)
+        } catch (e: any) {
+            console.error(e.message)
+            return res.status(500).send(e.message)
+        }
     }
 
-    async addUsageRecord(usage: Usage): Promise<DBUsage> {
-        const insertedRecord = await this.usageRepository.addUsageRecord(usage)
-        return await this.usageRepository.getUsageRecordById(
-            insertedRecord.insertedId
-        )
+    async addUsageRecord(req: Request, res: Response) {
+        const usage: Usage = req.body
+        try {
+            const record = await this.usageRepository.addUsageRecord(usage)
+            return res.status(201).send(record)
+        } catch (e: any) {
+            console.error(e.message)
+            return res.status(500).send(e.message)
+        }
     }
 }

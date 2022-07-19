@@ -1,8 +1,7 @@
 import dotenv from 'dotenv'
-import express, { Express, Request, Response } from 'express'
-import bp from 'body-parser'
-import { Usage, UsageController } from './usage-controller'
+import { UsageController } from './usage-controller'
 import { UsageRepository } from './usage-repository'
+import App from './app'
 
 dotenv.config()
 
@@ -19,39 +18,16 @@ const usageRepository = new UsageRepository(
 )
 const usageController = new UsageController(usageRepository)
 
-const main = async (usageController: UsageController) => {
-    const server: Express = express()
-    server.use(bp.json())
-    server.use(bp.urlencoded({ extended: true }))
+const myApp = new App(usageController)
 
-    server.get('/usage', async (req: Request, res: Response) => {
-        try {
-            const records = await usageController.getAllUsageRecords()
-            return res.status(200).send(records)
-        } catch (e: any) {
-            console.error(e.message)
-            return res.status(500).send(e.message)
-        }
-    })
-
-    server.post('/usage', async (req: Request, res: Response) => {
-        const usage: Usage = req.body
-        try {
-            const record = await usageController.addUsageRecord(usage)
-            return res.status(201).send(record)
-        } catch (e: any) {
-            console.error(e.message)
-            return res.status(500).send(e.message)
-        }
-    })
-
-    server.listen(port, () => {
+const main = async () => {
+    myApp.application.listen(port, () => {
         console.log(
             `⚡️[server]: Server is running at https://localhost:${port}`
         )
     })
 }
 
-main(usageController).catch((err) => {
+main().catch((err) => {
     console.error(err)
 })

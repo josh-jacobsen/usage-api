@@ -2,6 +2,7 @@ import { UsageController } from './usage-controller'
 import { UsageRepository } from './usage-repository'
 import { MongoMemoryServer } from 'mongodb-memory-server'
 import { MongoClient } from 'mongodb'
+import { Request, Response } from 'express'
 
 describe('Usage controller tests', () => {
     let usageController: UsageController
@@ -24,13 +25,37 @@ describe('Usage controller tests', () => {
     })
 
     it('writes usage record', async () => {
-        const result = await usageController.addUsageRecord({
-            customerId: 1,
-            unitsConsumed: 2,
-            pricePerUnit: 1.5,
-            service: 'will this work',
+        const status = jest.fn(() => {
+            return this
         })
-        expect(result._id).toBeDefined()
+        const send = jest.fn()
+        const res = {
+            send,
+            json: function (err: unknown) {
+                console.log('\n : ' + err)
+            },
+            status: function (responseStatus: unknown) {
+                // This next line makes it chainable
+                return this
+            },
+        }
+        const result = await usageController.addUsageRecord(
+            {
+                body: {
+                    customerId: 1,
+                    unitsConsumed: 2,
+                    pricePerUnit: 1.5,
+                    service: 'will this work',
+                },
+            } as Request,
+            res as unknown as Response
+        )
+        expect(send).toHaveBeenCalledTimes(1)
+        expect(send).toBeCalledWith(
+            expect.objectContaining({
+                acknowledged: true,
+            })
+        )
     })
 
     it('returns all usage records', async () => {
@@ -51,10 +76,37 @@ describe('Usage controller tests', () => {
             },
         ])
 
-        const result = await usageController.getAllUsageRecords()
+        const status = jest.fn(() => {
+            return this
+        })
+        const send = jest.fn()
+        const res = {
+            send,
+            json: function (err: unknown) {
+                console.log('\n : ' + err)
+            },
+            status: function (responseStatus: unknown) {
+                // This next line makes it chainable
+                return this
+            },
+        }
 
-        expect(result.length).toEqual(2)
-        expect(result[0]._id).toBeDefined()
-        expect(result[1]._id).toBeDefined()
+        const result = await usageController.getAllUsageRecords(
+            {
+                body: {
+                    customerId: 1,
+                    unitsConsumed: 2,
+                    pricePerUnit: 1.5,
+                    service: 'will this work',
+                },
+            } as Request,
+            res as unknown as Response
+        )
+
+        expect(send).toHaveBeenCalledTimes(1)
+
+        // expect(result.length).toEqual(2)
+        // expect(result[0]._id).toBeDefined()
+        // expect(result[1]._id).toBeDefined()
     })
 })
